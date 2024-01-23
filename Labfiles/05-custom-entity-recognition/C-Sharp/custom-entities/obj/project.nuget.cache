@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "oP2v7KbLooMd3Oq1J9XdluB5RZ1Pk32XN4nOt1xZ4UUA8n/xokEPrUC1nNOWgZ7IznN9Hzqn/A3OtTufJa5FMg==",
+  "success": true,
+  "projectFilePath": "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.3\\microsoft.extensions.configuration.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.3\\microsoft.extensions.configuration.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\3.1.3\\microsoft.extensions.configuration.fileextensions.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.configuration.json\\3.1.3\\microsoft.extensions.configuration.json.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.1.3\\microsoft.extensions.fileproviders.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\3.1.3\\microsoft.extensions.fileproviders.physical.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\3.1.3\\microsoft.extensions.filesystemglobbing.3.1.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512"
+  ],
+  "logs": []
+}
