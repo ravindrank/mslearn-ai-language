@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = translate_text
-build_property.ProjectDir = C:\src\mslearn-ai-language\Labfiles\06b-translator-sdk\C-Sharp\translate-text\
+build_property.ProjectDir = c:\src\mslearn-ai-language\Labfiles\06b-translator-sdk\C-Sharp\translate-text\

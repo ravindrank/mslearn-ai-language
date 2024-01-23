@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj": {}
+    "C:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj": {}
   },
   "projects": {
-    "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj": {
+    "C:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj",
+        "projectUniqueName": "C:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj",
         "projectName": "custom-entities",
-        "projectPath": "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj",
+        "projectPath": "C:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\custom-entities.csproj",
         "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-        "outputPath": "c:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\obj\\",
+        "outputPath": "C:\\src\\mslearn-ai-language\\Labfiles\\05-custom-entity-recognition\\C-Sharp\\custom-entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Student\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Azure.AI.TextAnalytics": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[3.1.3, )"
