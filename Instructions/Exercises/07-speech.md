@@ -29,7 +29,7 @@ If you don't already have one in your subscription, you'll need to provision an 
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Select **F0** (*free*), or **S** (*standard*) if F is not available.
     - **Responsible AI Notice**: Agree.
-1. Select **Review + create**.
+1. Select **Review + create**, then select **Create** to provision the resource.
 1. Wait for deployment to complete, and then go to the deployed resource.
 1. View the **Keys and Endpoint** page. You will need the information on this page later in the exercise.
 
@@ -42,6 +42,9 @@ You'll develop your speech app using Visual Studio Code. The code files for your
 1. Start Visual Studio Code.
 1. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-ai-language` repository to a local folder (it doesn't matter which folder).
 1. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 1. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
@@ -183,7 +186,7 @@ Now that you have a **SpeechConfig** for the speech service in your Azure AI Spe
     **Python**
 
     ```
-    pip install playsound==1.3.0
+    pip install playsound==1.2.2
     ```
 
 1. In the code file for your program, under the existing namespace imports, add the following code to import the library you just installed:

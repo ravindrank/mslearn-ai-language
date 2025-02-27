@@ -15,9 +15,9 @@ One of the most common conversational scenarios is providing support through a k
 If you don't already have one in your subscription, you'll need to provision an **Azure AI Language service** resource. Additionally, to create and host a knowledge base for question answering, you need to enable the **Question Answering** feature.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-1. In the search field at the top enter **Azure AI services**, then press **Enter**.
-1. Select **Create** under the **Language Service** resource in the results.
-1. **Select** the **Custom question answering** block. Then select **Continue to create your resource**. You will need to enter the following settings:
+1. Select **Create a resource**.
+1. In the search field, search for **Language service**. Then, in the results, select **Create** under **Language Service**.
+1. Select the **Custom question answering** block. Then select **Continue to create your resource**. You will need to enter the following settings:
 
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Choose or create a resource group*.
@@ -55,7 +55,7 @@ To create a knowledge base for question answering in your Azure AI Language reso
     4. At the top of the page, click **Language Studio** to return to the Language Studio home page.
 
 1. At the top of the portal, in the **Create new** menu, select **Custom question answering**.
-1. In the ***Create a project** wizard, on the **Choose language setting** page, select the option to **Set the language for all projects in this resource**, and select **English** as the language. Then select **Next**.
+1. In the ***Create a project** wizard, on the **Choose language setting** page, select the option to **Select the language for all projects**, and select **English** as the language. Then select **Next**.
 1. On the **Enter basic information** page, enter the following details:
     - **Name** `LearnFAQ`
     - **Description**: `FAQ for Microsoft Learn`
@@ -65,7 +65,7 @@ To create a knowledge base for question answering in your Azure AI Language reso
 
 ## Add sources to the knowledge base
 
-You can create a knowledge base from scratch, but it's common to start by importing questions and answers from an existing FAQ page or document. In this case, you'll import data from an existing FAQ web page for Microsoft learn, and you'll also import some pre-defined "chit chat" questions and answers to support common conversational exchanges.
+You can create a knowledge base from scratch, but it's common to start by importing questions and answers from an existing FAQ page or document. In this case, you'll import data from an existing FAQ web page for Microsoft Learn, and you'll also import some pre-defined "chit chat" questions and answers to support common conversational exchanges.
 
 1. On the **Manage sources** page for your question answering project, in the **&#9547; Add source** list, select **URLs**. Then in the **Add URLs** dialog box, select **&#9547; Add url** and set the following name and URL  before you select **Add all** to add it to the knowledge base:
     - **Name**: `Learn FAQ Page`
@@ -109,7 +109,7 @@ Now that you have a knowledge base, you can test it in Language Studio.
 
 The knowledge base provides a back-end service that client applications can use to answer questions. Now you are ready to publish your knowledge base and access its REST interface from a client.
 
-1. In the **LearnFAQ** project in Language Studio, select the **Deploy knowledge base** page.
+1. In the **LearnFAQ** project in Language Studio, select the **Deploy knowledge base** page from the navigation menu on the left.
 1. At the top of the page, select **Deploy**. Then select **Deploy** to confirm you want to deploy the knowledge base.
 1. When deployment is complete, select **Get prediction URL** to view the REST endpoint for your knowledge base and note that the sample request includes parameters for:
     - **projectName**: The name of your project (which should be *LearnFAQ*)
@@ -125,6 +125,9 @@ You'll develop your question answering app using Visual Studio Code. The code fi
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-ai-language` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
@@ -209,10 +212,12 @@ Now you're ready to add the code necessary to import the required SDK libraries,
     ```C#
     // Submit a question and display the answer
     string user_question = "";
-    while (user_question.ToLower() != "quit")
+    while (true)
         {
             Console.Write("Question: ");
             user_question = Console.ReadLine();
+            if (user_question.ToLower() == "quit")
+                break;
             QuestionAnsweringProject project = new QuestionAnsweringProject(projectName, deploymentName);
             Response<AnswersResult> response = aiClient.GetAnswers(user_question, project);
             foreach (KnowledgeBaseAnswer answer in response.Value.Answers)
@@ -230,8 +235,10 @@ Now you're ready to add the code necessary to import the required SDK libraries,
     ```Python
     # Submit a question and display the answer
     user_question = ''
-    while user_question.lower() != 'quit':
+    while True:
         user_question = input('\nQuestion:\n')
+        if user_question.lower() == "quit":                
+            break
         response = ai_client.get_answers(question=user_question,
                                         project_name=ai_project_name,
                                         deployment_name=ai_deployment_name)

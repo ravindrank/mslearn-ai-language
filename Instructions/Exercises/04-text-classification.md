@@ -20,7 +20,18 @@ If you don't already have one in your subscription, you'll need to provision an 
 1. Create a resource with the following settings:
     - **Subscription**: *Your Azure subscription*.
     - **Resource group**: *Select or create a resource group*.
-    - **Region**: *Choose any available region*:
+    - **Region**: *Choose from one of the following regions*\*
+        - Australia East
+        - Central India
+        - East US
+        - East US 2
+        - North Europe
+        - South Central US
+        - Switzerland North
+        - UK South
+        - West Europe
+        - West US 2
+        - West US 3
     - **Name**: *Enter a unique name*.
     - **Pricing tier**: Select **F0** (*free*), or **S** (*standard*) if F is not available.
     - **Storage account**: New storage account
@@ -31,6 +42,16 @@ If you don't already have one in your subscription, you'll need to provision an 
 1. Select **Review + create,** then select **Create** to provision the resource.
 1. Wait for deployment to complete, and then go to the deployed resource.
 1. View the **Keys and Endpoint** page. You will need the information on this page later in the exercise.
+
+## Roles for your user
+> **NOTE**: If you skip this step, you'll have a 403 error when trying to connect to your custom project. It's important that your current user has this role to access storage account blob data, even if you're the owner of the storage account.**
+
+1. Go to your storage account page in the Azure portal.
+2. Select **Access Control (IAM)** in the left navigation menu.
+3. Select **Add** to Add Role Assignments, and choose the **Storage Blob Data Contributor** role on the storage account.
+4. Within **Assign access to**, select **User, group, or service principal**.
+5. Select **Select members**.
+6. Select your User. You can search for user names in the **Select** field.
 
 ## Upload sample articles
 
@@ -81,6 +102,8 @@ After configuration is complete, create a custom text classification project. Th
 1. On the **Choose container** page, set the **Blob store container** dropdown to your *articles* container.
 1. Select the  **No, I need to label my files as part of this project** option. Then select **Next**.
 1. Select **Create project**.
+
+> **Tip**: If you get an error about not being authorized to perform this operation, you'll need to add a role assignment. To fix this, we add the role "Storage Blob Data Contributor" on the storage account for the user running the lab. More details can be found [on the documentation page](https://learn.microsoft.com/azure/ai-services/language-service/custom-named-entity-recognition/how-to/create-project?tabs=portal%2Clanguage-studio#enable-identity-management-for-your-resource)
 
 ## Label your data
 
@@ -157,6 +180,9 @@ To test the custom text classification capabilities of the Azure AI Language ser
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-ai-language` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
@@ -185,7 +211,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     - **C#**: appsettings.json
     - **Python**: .env
     
-1. Update the configuration values to include the  **endpoint** and a **key** from the Azure Language resource you created (available on the **Keys and Endpoint** page for your Azure AI Language resource in the Azure portal). The fil should already contain the project and deployment names for your text classification model.
+1. Update the configuration values to include the  **endpoint** and a **key** from the Azure Language resource you created (available on the **Keys and Endpoint** page for your Azure AI Language resource in the Azure portal). The file should already contain the project and deployment names for your text classification model.
 1. Save the configuration file.
 
 ## Add code to classify documents

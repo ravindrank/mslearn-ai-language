@@ -15,7 +15,8 @@ For example, suppose a travel agency wants to process hotel reviews that have be
 If you don't already have one in your subscription, you'll need to provision an **Azure AI Language service** resource in your Azure subscription.
 
 1. Open the Azure portal at `https://portal.azure.com`, and sign in using the Microsoft account associated with your Azure subscription.
-1. In the search field at the top, search for **Azure AI services**. Then, in the results, select **Create** under **Language Service**.
+1. Select **Create a resource**.
+1. In the search field, search for **Language service**. Then, in the results, select **Create** under **Language Service**.
 1. Select **Continue to create your resource**.
 1. Provision the resource using the following settings:
     - **Subscription**: *Your Azure subscription*.
@@ -24,9 +25,9 @@ If you don't already have one in your subscription, you'll need to provision an 
     - **Name**: *Enter a unique name*.
     - **Pricing tier**: Select **F0** (*free*), or **S** (*standard*) if F is not available.
     - **Responsible AI Notice**: Agree.
-1. Select **Review + create**.
+1. Select **Review + create**, then select **Create** to provision the resource.
 1. Wait for deployment to complete, and then go to the deployed resource.
-1. View the **Keys and Endpoint** page. You will need the information on this page later in the exercise.
+1. View the **Keys and Endpoint** page in the **Resource Management** section. You will need the information on this page later in the exercise.
 
 ## Prepare to develop an app in Visual Studio Code
 
@@ -37,6 +38,9 @@ You'll develop your text analytics app using Visual Studio Code. The code files 
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-ai-language` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
@@ -45,8 +49,8 @@ You'll develop your text analytics app using Visual Studio Code. The code files 
 
 Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable it to use your Azure AI Language resource.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-analyze-text** folder and expand the **CSharp** or **Python** folder depending on your language preference and the **text-analytics** folder it contains. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure AI Language text analytics functionality.
-2. Right-click the **text-analytics** folder containing your code files and open an integrated terminal. Then install the Azure AI Language Text Analytics SDK package by running the appropriate command for your language preference. For the Python exercise, also install the `dotenv` package:
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-analyze-text** folder and expand the **CSharp** or **Python** folder depending on your language preference and the **text-analysis** folder it contains. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure AI Language text analytics functionality.
+2. Right-click the **text-analysis** folder containing your code files and open an integrated terminal. Then install the Azure AI Language Text Analytics SDK package by running the appropriate command for your language preference. For the Python exercise, also install the `dotenv` package:
 
     **C#**:
 
@@ -61,7 +65,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     pip install python-dotenv
     ```
 
-3. In the **Explorer** pane, in the **text-analytics** folder, open the configuration file for your preferred language
+3. In the **Explorer** pane, in the **text-analysis** folder, open the configuration file for your preferred language
 
     - **C#**: appsettings.json
     - **Python**: .env

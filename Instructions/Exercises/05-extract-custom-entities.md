@@ -15,10 +15,21 @@ To test the custom entity extraction, we'll create a model and train it through 
 If you don't already have one in your subscription, you'll need to provision an **Azure AI Language service** resource. Additionally, use custom text classification, you need to enable the **Custom text classification & extraction** feature.
 
 1. In a browser, open the Azure portal at `https://portal.azure.com`, and sign in with your Microsoft account.
-1. Select the **Create a resource** button, search for *Language*, and create an **Azure AI Language Service** resource. When asked about *Additional features*, select **Custom text classification & extraction**. Create the resource with the following settings:
+1. Select the **Create a resource** button, search for *Language*, and create a **Language Service** resource. When on the page for *Select additional features*, select the custom feature containing **Custom named entity recognition extraction**. Create the resource with the following settings:
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Select or create a resource group*
-    - **Region**: *Choose any available region*
+    - **Region**: *Choose from one of the following regions*\*
+        - Australia East
+        - Central India
+        - East US
+        - East US 2
+        - North Europe
+        - South Central US
+        - Switzerland North
+        - UK South
+        - West Europe
+        - West US 2
+        - West US 3
     - **Name**: *Enter a unique name*
     - **Pricing tier**: Select **F0** (*free*), or **S** (*standard*) if F is not available.
     - **Storage account**: New storage account:
@@ -26,9 +37,19 @@ If you don't already have one in your subscription, you'll need to provision an 
       - **Storage account type**: Standard LRS
     - **Responsible AI notice**: Selected.
 
-1. Select **Review + create,** then select **Create** to provision the resource.
+1. Select **Review + create**, then select **Create** to provision the resource.
 1. Wait for deployment to complete, and then go to the deployed resource.
 1. View the **Keys and Endpoint** page. You will need the information on this page later in the exercise.
+
+## Roles for your user
+> **NOTE**: If you skip this step, you'll have a 403 error when trying to connect to your custom project. It's important that your current user has this role to access storage account blob data, even if you're the owner of the storage account.**
+
+1. Go to your storage account page in the Azure portal.
+2. Select **Access Control (IAM)** in the left navigation menu.
+3. Select **Add** to Add Role Assignments, and choose the **Storage Blob Data Contributor** role on the storage account.
+4. Within **Assign access to**, select **User, group, or service principal**.
+5. Select **Select members**.
+6. Select your User. You can search for user names in the **Select** field.
 
 ## Upload sample ads
 
@@ -48,7 +69,7 @@ After you've created the Azure AI Language Service and storage account, you'll n
 
 ## Create a custom named entity recognition project
 
-Now you're ready to reate a custom named entity recognition project. This project provides a working place to build, train, and deploy your model.
+Now you're ready to create a custom named entity recognition project. This project provides a working place to build, train, and deploy your model.
 
 > **NOTE**: You can also create, build, train, and deploy your model through the REST API.
 
@@ -62,14 +83,14 @@ Now you're ready to reate a custom named entity recognition project. This projec
 
     If you are <u>not</u> prompted to choose a language resource, it may be because you have multiple Language resources in your subscription; in which case:
 
-    1. On the bar at the top if the page, select the **Settings (&#9881;)** button.
+    1. On the bar at the top of the page, select the **Settings (&#9881;)** button.
     2. On the **Settings** page, view the **Resources** tab.
     3. Select the language resource you just created, and click **Switch resource**.
-    4. At the top of the page, click **Language Studio** to return to the Language Studio home page
+    4. At the top of the page, click **Language Studio** to return to the Language Studio home page.
 
-1. At the top of the portal, in the **Create new** menu, select *Custom named entity recognition**.
+1. At the top of the portal, in the **Create new** menu, select **Custom named entity recognition**.
 
-1. Create a mew project with the following settings:
+1. Create a new project with the following settings:
     - **Connect storage**: *This  value is likely already filled. Change it to your storage account if it isn't already*
     - **Basic information**:
     - **Name**: `CustomEntityLab`
@@ -80,13 +101,15 @@ Now you're ready to reate a custom named entity recognition project. This projec
         - **Blob store container**: classifieds
         - **Are your files labeled with classes?**: No, I need to label my files as part of this project
 
+> **Tip**: If you get an error about not being authorized to perform this operation, you'll need to add a role assignment. To fix this, we add the role "Storage Blob Data Contributor" on the storage account for the user running the lab. More details can be found [on the documentation page](https://learn.microsoft.com/azure/ai-services/language-service/custom-named-entity-recognition/how-to/create-project?tabs=portal%2Clanguage-studio#enable-identity-management-for-your-resource)
+
 ## Label your data
 
 Now that your project is created, you need to label your data to train your model how to identity entities.
 
 1. If the **Data labeling** page is not already open, in the pane on the left, select **Data labeling**. You'll see a list of the files you uploaded to your storage account.
 1. On the right side, in the **Activity** pane, select **Add entity** and add a new entity named `ItemForSale`.
-1.  Repeat the previous stept o create the following entities:
+1.  Repeat the previous step to create the following entities:
     - `Price`
     - `Location`
 1. After you've created your three entities, select **Ad 1.txt** so you can read it.
@@ -94,8 +117,8 @@ Now that your project is created, you need to label your data to train your mode
     1. Highlight the text *face cord of firewood* and select the **ItemForSale** entity.
     1. Highlight the text *Denver, CO* and select the **Location** entity.
     1. Highlight the text *$90* and select the **Price** entity.
-1.In the **Activity** pane, note that this document will be added to the dataset for training the model.
-1. Us the **Next document** button to move to the next document, and continue assigning text to appropriate entities for the entire set of documents, adding them all to the training dataset.
+1. In the **Activity** pane, note that this document will be added to the dataset for training the model.
+1. Use the **Next document** button to move to the next document, and continue assigning text to appropriate entities for the entire set of documents, adding them all to the training dataset.
 1. When you have labeled the last document (*Ad 9.txt*), save the labels.
 
 ## Train your model
@@ -136,13 +159,16 @@ To test the custom entity extraction capabilities of the Azure AI Language servi
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-ai-language` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
 
 ## Configure your application
 
-Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable it to use your Azure AI Language resource.
+Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable it to use your Azure AI Language resource.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/05-custom-entity-recognition** folder and expand the **CSharp** or **Python** folder depending on your language preference and the **custom-entities** folder it contains. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure AI Language text classification functionality.
 1. Right-click the **custom-entities** folder containing your code files and open an integrated terminal. Then install the Azure AI Language Text Analytics SDK package by running the appropriate command for your language preference:
@@ -164,7 +190,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     - **C#**: appsettings.json
     - **Python**: .env
     
-1. Update the configuration values to include the  **endpoint** and a **key** from the Azure Language resource you created (available on the **Keys and Endpoint** page for your Azure AI Language resource in the Azure portal). The fil should already contain the project and deployment names for your custom entity extraction model.
+1. Update the configuration values to include the  **endpoint** and a **key** from the Azure Language resource you created (available on the **Keys and Endpoint** page for your Azure AI Language resource in the Azure portal). The file should already contain the project and deployment names for your custom entity extraction model.
 1. Save the configuration file.
 
 ## Add code to extract entities
@@ -214,7 +240,7 @@ Now you're ready to use the Azure AI Language service to extract custom entities
     ai_client = TextAnalyticsClient(endpoint=ai_endpoint, credential=credential)
     ```
 
-1. in the **Main** function, note that the existing code reads all of the files in the **ads** folder and creates a list containing their contents. In the case of the C# code, the a list of **TextDocumentInput** objects is used to include the file name as an ID and the language. In Python a simple list of the text contents is used.
+1. In the **Main** function, note that the existing code reads all of the files in the **ads** folder and creates a list containing their contents. In the case of the C# code, a list of **TextDocumentInput** objects is used to include the file name as an ID and the language. In Python a simple list of the text contents is used.
 1. Find the comment **Extract entities** and add the following code:
 
     **C#**: Program.cs
@@ -290,7 +316,7 @@ Now you're ready to use the Azure AI Language service to extract custom entities
 
 Now your application is ready to test.
 
-1. In the integrated terminal for the **classify-text** folder, and enter the following command to run the program:
+1. In the integrated terminal for the **classify-text** folder enter the following command to run the program:
 
     - **C#**: `dotnet run`
     - **Python**: `python custom-entities.py`
